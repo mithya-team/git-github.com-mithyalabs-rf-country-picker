@@ -6,6 +6,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
+var reactForms = require('react-forms');
 var clsx = _interopDefault(require('clsx'));
 var styles$1 = require('@material-ui/core/styles');
 var Popper = _interopDefault(require('@material-ui/core/Popper'));
@@ -14,7 +15,6 @@ var Paper = _interopDefault(require('@material-ui/core/Paper'));
 var IconButton = _interopDefault(require('@material-ui/core/IconButton'));
 var Chip = _interopDefault(require('@material-ui/core/Chip'));
 var utils = require('@material-ui/core/utils');
-var reactForms = require('react-forms');
 var core = require('@material-ui/core');
 var lodash = require('lodash');
 
@@ -3292,6 +3292,8 @@ var MUICountryPicker = function (props) {
     };
     return React__default.createElement(Autocomplete$1, { options: reactForms.COUNTRY_LIST, getOptionLabel: function (option) { return option.name; }, onChange: handleChange, renderInput: function (params) { return React__default.createElement(core.TextField, __assign({}, params, { label: "Country" }, renderInputProps)); } });
 };
+
+reactForms.attachField('country', React__default.createElement(MUICountryPicker, null));
 
 var index = './lib';
 

@@ -1,4 +1,5 @@
 import React__default, { createElement, useRef, useState, useEffect, useCallback, forwardRef, Fragment as Fragment$1 } from 'react';
+import { COUNTRY_LIST, attachField } from 'react-forms';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Popper from '@material-ui/core/Popper';
@@ -7,7 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Chip from '@material-ui/core/Chip';
 import { createSvgIcon, unstable_useId, useControlled, useEventCallback, setRef } from '@material-ui/core/utils';
-import { COUNTRY_LIST } from 'react-forms';
 import { TextField } from '@material-ui/core';
 import { get } from 'lodash';
 
@@ -3285,6 +3285,8 @@ var MUICountryPicker = function (props) {
     };
     return React__default.createElement(Autocomplete$1, { options: COUNTRY_LIST, getOptionLabel: function (option) { return option.name; }, onChange: handleChange, renderInput: function (params) { return React__default.createElement(TextField, __assign({}, params, { label: "Country" }, renderInputProps)); } });
 };
+
+attachField('country', React__default.createElement(MUICountryPicker, null));
 
 var index = './lib';
 
