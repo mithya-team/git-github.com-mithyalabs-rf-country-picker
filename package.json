@@ -1,7 +1,8 @@
 {
-  "name": "rf-dropzone-file-picker",
+  
+  "name": "rf-country-picker",
   "version": "1.0.0",
-  "description": "A dropzone based file picker",
+  "description": "",
   "main": "dist/index.js",
   "jsnext:main": "dist/index.es.js",
   "module": "dist/index.es.js",
