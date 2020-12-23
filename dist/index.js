@@ -3285,12 +3285,22 @@ var Autocomplete$1 = styles$1.withStyles(styles, {
 })(Autocomplete);
 
 var MUICountryPicker = function (props) {
-    var _a = props.fieldProps, fieldProps = _a === void 0 ? {} : _a, _b = props.formikProps, formikProps = _b === void 0 ? {} : _b;
-    var renderInputProps = fieldProps.renderInputProps;
+    var _a, _b;
+    var _c = props.fieldProps, fieldProps = _c === void 0 ? {} : _c, _d = props.formikProps, formikProps = _d === void 0 ? {} : _d;
+    var renderInputProps = fieldProps.renderInputProps, name = fieldProps.name;
+    var value = lodash.get(formikProps, "values." + name);
+    if (typeof value === "object" && (!value.name || !value.code)) {
+        value =
+            ((_a = reactForms.COUNTRY_LIST.filter(function (country) { return value.dial_code === country.dial_code; })) === null || _a === void 0 ? void 0 : _a[0]) || {};
+    }
+    else if (typeof value === "string") {
+        value =
+            ((_b = reactForms.COUNTRY_LIST.filter(function (country) { return value === country.dial_code; })) === null || _b === void 0 ? void 0 : _b[0]) || {};
+    }
     var handleChange = function (event) {
-        formikProps.setFieldValue(lodash.get(fieldProps, 'name'), event.currentTarget.innerText);
+        formikProps.setFieldValue(name, event.currentTarget.innerText);
     };
-    return React__default.createElement(Autocomplete$1, { options: reactForms.COUNTRY_LIST, getOptionLabel: function (option) { return option.name; }, onChange: handleChange, renderInput: function (params) { return React__default.createElement(core.TextField, __assign({}, params, { label: "Country" }, renderInputProps)); } });
+    return (React__default.createElement(Autocomplete$1, { value: value, options: reactForms.COUNTRY_LIST, getOptionLabel: function (option) { return option.name; }, onChange: handleChange, renderInput: function (params) { return (React__default.createElement(core.TextField, __assign({}, params, { label: "Country" }, renderInputProps))); } }));
 };
 
 reactForms.attachField('country', React__default.createElement(MUICountryPicker, null));
