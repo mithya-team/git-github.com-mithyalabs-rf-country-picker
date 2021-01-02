@@ -3278,22 +3278,32 @@ var Autocomplete$1 = withStyles(styles, {
 })(Autocomplete);
 
 var MUICountryPicker = function (props) {
-    var _a, _b;
-    var _c = props.fieldProps, fieldProps = _c === void 0 ? {} : _c, _d = props.formikProps, formikProps = _d === void 0 ? {} : _d;
+    var _a = props.fieldProps, fieldProps = _a === void 0 ? {} : _a, _b = props.formikProps, formikProps = _b === void 0 ? {} : _b;
     var renderInputProps = fieldProps.renderInputProps, name = fieldProps.name;
     var value = get(formikProps, "values." + name);
-    if (typeof value === "object" && (!value.name || !value.code)) {
-        value =
-            ((_a = COUNTRY_LIST.filter(function (country) { return value.dial_code === country.dial_code; })) === null || _a === void 0 ? void 0 : _a[0]) || {};
-    }
-    else if (typeof value === "string") {
-        value =
-            ((_b = COUNTRY_LIST.filter(function (country) { return value === country.dial_code; })) === null || _b === void 0 ? void 0 : _b[0]) || {};
-    }
-    var handleChange = function (event) {
-        formikProps.setFieldValue(name, event.currentTarget.innerText);
+    // if (typeof value === "object" && (!value.name || !value.code)) {
+    //     value =
+    //         COUNTRY_LIST.filter(
+    //             (country) => value.dial_code === country.dial_code
+    //         )?.[0] || {};
+    // } else if (typeof value === "string") {
+    //     value =
+    //         COUNTRY_LIST.filter((country) => value === country.dial_code)?.[0] || {};
+    // }
+    var handleChange = function (_event, value) {
+        console.log(value);
+        formikProps.setFieldValue(name, value);
     };
-    return (React__default.createElement(Autocomplete$1, { value: value, options: COUNTRY_LIST, getOptionLabel: function (option) { return option.name; }, onChange: handleChange, renderInput: function (params) { return (React__default.createElement(TextField, __assign({}, params, { label: "Country" }, renderInputProps))); } }));
+    var helperText = getFieldError(name, formikProps);
+    var error = !!helperText;
+    return (React__default.createElement(Autocomplete$1, { value: value, options: COUNTRY_LIST.map(function (i) { return i.name; }), getOptionLabel: function (o) { return o; }, onChange: handleChange, renderInput: function (params) { return (React__default.createElement(TextField, __assign({}, params, { label: "Country" }, renderInputProps, { inputProps: __assign(__assign(__assign({}, params.inputProps), renderInputProps === null || renderInputProps === void 0 ? void 0 : renderInputProps.inputProps), { autoComplete: 'nope' }), error: error, helperText: helperText }))); } }));
+};
+var getFieldError = function (fieldName, formikProps) {
+    var fieldError = get(formikProps, "errors." + fieldName);
+    var isTouched = get(formikProps, "touched." + fieldName);
+    if (!isTouched && formikProps.submitCount < 1)
+        return '';
+    return fieldError;
 };
 
 attachField('country', React__default.createElement(MUICountryPicker, null));
