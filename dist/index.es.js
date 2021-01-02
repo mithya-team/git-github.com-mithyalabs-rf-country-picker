@@ -3291,7 +3291,6 @@ var MUICountryPicker = function (props) {
     //         COUNTRY_LIST.filter((country) => value === country.dial_code)?.[0] || {};
     // }
     var handleChange = function (_event, value) {
-        console.log(value);
         formikProps.setFieldValue(name, value);
     };
     var helperText = getFieldError(name, formikProps);

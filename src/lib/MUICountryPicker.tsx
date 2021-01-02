@@ -36,7 +36,6 @@ export const MUICountryPicker: React.FC<MUICountryPickerProps> = (
   // }
 
   const handleChange = (_event: React.ChangeEvent<{}>, value: string | string[] | null) => {
-    console.log(value)
     formikProps.setFieldValue(name, value);
   };
   const helperText = getFieldError(name, formikProps);
